@@ -1,0 +1,82 @@
+  	
+<div class="page-header text-center">
+	<h1>Upload new image :</h1>
+</div>
+
+<div class="row" [hidden]="!sizeOverLimit">
+	<div class="col-md-8 col-md-offset-2 cols-xs-12">
+		<div class="well well-md text-center">
+			<h3>Your storage is over limit (4 MB)!</h3>
+			<h4>please delete some images</h4>
+		</div>
+	</div>
+</div>
+
+<div class="row main" [hidden]="success || sizeOverLimit">
+	<div class="main-login main-center">
+		<h5>Start uploading your images now!</h5>
+		<form (ngSubmit)='addImage()'>
+
+			<div class="form-group">
+				<label for="name" class="cols-sm-2 control-label">Choose image</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-level-up" aria-hidden="true"></i></span>
+						<input type="file" class="form-control" name="img" (change)="fileChange(input)" #input required />
+					</div>
+					<div class="cols-xs-10 text-center" style="margin-top: 15px" *ngIf="previewImage !== ''">
+						<h4>Image Preview :</h4>
+						<img [attr.src]='previewImage'  class='img-responsive' style="margin: auto" />
+
+						<p>{{ size_before }} bytes <b>Before</b> </p>
+						<p>{{ size_after }} bytes <b>After</b></p>
+						<div class="form-group">
+							<label for="name" class="cols-sm-2 control-label">Add tag :</label>
+								<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-level-up" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="imgTag" #inputTag />
+								</div>
+									<button class="btn btn-primary" (click)="addTag(inputTag)">Add</button>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="name" class="cols-sm-2 control-label">Title</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-text-color" aria-hidden="true"></i></span>
+						<input type="text" class="form-control" name="title" id="title"  placeholder="Enter image title" [(ngModel)]="img.title" required/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="email" class="cols-sm-2 control-label">Description</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i></span>
+						<input type="text" class="form-control" name="desc" id="desc"  placeholder="Enter image description" [(ngModel)]="img.desc"/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group ">
+				<button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+			</div>
+
+		</form>
+	</div>
+</div>
+
+<div class="row" [hidden]="!success">
+	<div class="col-md-8 col-md-offset-2 cols-xs-12">
+		<div class="well well-md text-center">
+			<h3>Your image is successfully uploaded!</h3>
+			<button class="btn btn-success btn-lg" (click)="success=false">Add a new image</button>
+		</div>
+	</div>
+</div>

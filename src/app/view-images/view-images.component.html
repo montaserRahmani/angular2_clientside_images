@@ -1,0 +1,19 @@
+
+<div class="page-header text-center">
+  <h1>Uploaded Images :</h1>
+</div>
+
+<div class='row'>
+
+	<div class='col-md-4 col-xs-12 text-center' *ngFor="let img of images; let i = index">
+			<ul class="list-group">
+			  <li class="list-group-item"><img src='{{ img.imgSrc }}' class='img-responsive' /></li>
+			  <li class="list-group-item">{{ img.title }}</li>
+			  <li class="list-group-item" *ngIf="img.desc">{{ img.desc }}</li>
+			  <li class="list-group-item"><button class="btn btn-danger" (click)="deleteImage(i)">
+			  	Delete Image
+			  </button></li>
+			</ul>
+	</div>
+
+</div>
